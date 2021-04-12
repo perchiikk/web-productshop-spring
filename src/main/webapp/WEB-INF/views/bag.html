@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your bag</title>
+    <style>
+        .btn {
+            display: inline-block; /* Строчно-блочный элемент */
+            background: #CD5C5C; /* Розовый цвет фона */
+            color: #fff; /* Белый цвет текста */
+            font-size: 12pt;
+            padding: 0.5rem 0.5rem; /* Поля вокруг текста */
+            text-decoration: none; /* Убираем подчёркивание */
+            border-radius: 3px; /* Скругляем уголки */
+        }
+    </style>
+</head>
+<body>
+<h2>The amount of your purchase</h2>
+
+<!--<p th:each="entry: ${bag}">
+    <span th:text="'Key: ' + ${entry.key} + ', Value: ' + ${entry.value}">
+    </span>
+</p>-->
+<tr th:each="entry: ${bag}">
+    <td th:text="'Product: ' + ${entry.key.getName()}"> keyvalue</td>
+    <td th:text="'Count: ' + ${entry.value}">num</td>
+    <td> <!--<a th:href="@{/shop/{item}(item=${entry.key})}" class="btn">Delete</a>-->
+        <form th:method="DELETE" th:action="@{/shop/bag/{item}(item=${entry.key.getName()})}">
+            <input type="submit" value="Delete"/>
+        </form>
+    </td>
+</tr>
+</br>
+</hr>
+<a href="/customers/payment">Make order!</a>
+<a href="/shop/catalog">Go to catalog</a>
+</body>
+</html>

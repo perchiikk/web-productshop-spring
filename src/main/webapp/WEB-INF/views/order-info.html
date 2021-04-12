@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Info</title>
+</head>
+<body>
+
+<tr th:each="order : ${orders}">
+    <td th:text="${order.getId()}"></td>
+    <td th:text="${order.getPrice()}"></td>
+    <td th:text="${order.getData()}"></td>
+</tr>
+
+<a href="/shop/table">Go back</a>
+</body>
+</html>

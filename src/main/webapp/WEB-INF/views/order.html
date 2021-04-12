@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+<h2>Make your order</h2>
+
+<form th:method="POST" th:action="@{/shop}" th:object="${order}">
+
+    <label for="name">PRODUCT NAME: </label>
+   <!-- <input type="text" th:value="${product.name}" th:name="${product.getName()}" th:field="*{nameProduct}" id="name"/>-->
+    <input type="text" name="nameProduct" th:value="${product.name}" id="name"/>
+    <br/>
+    <label for="count">ENTER COUNT: </label>
+    <input type="text" th:field="*{count}" id="count"/>
+
+    <input type="submit" value="Add to bag!">
+</form>
+<p>
+    You can see your bag <a href="/shop/bag">Go to bag</a>
+</p>
+</body>
+</html>

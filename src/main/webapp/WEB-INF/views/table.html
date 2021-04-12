@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Buyer</title>
+</head>
+<body>
+
+<div th:each="buyer : ${buyers}">
+    <a th:href="@{/shop/table/{id}(id=${buyer.getId()})}" th:text="${buyer.getName() + buyer.getAge()}">buyer</a>
+</div>
+
+</body>
+</html>

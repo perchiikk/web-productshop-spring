@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All customers</title>
+</head>
+<body>
+<h2>All customers</h2>
+<div th:each="customer : ${customers}">
+    <a th:text="${customer.getName() + ' age: ' + customer.getAge() + ' budget: ' + customer.getBudget()}">product</a>
+</div>
+</body>
+</html>

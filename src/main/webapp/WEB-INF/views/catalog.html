@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+</head>
+<body>
+<h2>CATALOG</h2>
+<p>Click on an item to add to bag</p>
+<div th:each="product : ${products}">
+    <a th:href="@{/shop/{id}/order(id=${product.getId()})}" th:text="${product.getName() + ' ' + product.getCount()}">product</a>
+</div>
+<p> Would you like to make order? <a href="/shop/order">Go to make order</a></p>
+<p> You can see your bag. Just click
+    <a href="/shop/bag">Go to your bag</a>
+</p>
+</body>
+</html>
