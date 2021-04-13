@@ -10,10 +10,10 @@ public class Order {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column
-    private Integer price;
+    private int price;
 
     @Column(name = "order_date")
     private Date data;
@@ -28,24 +28,24 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer price, Date data) {
+    public Order(int price, Date data) {
         this.price = price;
         this.data = data;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

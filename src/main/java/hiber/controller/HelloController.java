@@ -1,6 +1,7 @@
 package hiber.controller;
 
 import hiber.model.other.CurrentOrder;
+import hiber.model.sql.ListOfOrder;
 import hiber.model.sql.Order;
 import hiber.service.customer.CustomerService;
 import hiber.service.listoforder.ListOfOrderService;
@@ -11,6 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("shop")
@@ -82,9 +88,23 @@ public class HelloController {
 
     @GetMapping("/order/{id}")
     public String orderInfo(@PathVariable("id") int id, Model model){
-        model.addAttribute("orders", customerService.getById(id).getOrder());
-        Order order = orderService.getByCustomerId(id);
-        System.out.println(order);
+
+        //Set<Order> setOrders = customerService.getById(id).getOrder();
+        List<Order> orderList = orderService.getByCustomerId(id);
+        //Set<ListOfOrder> setList = new HashSet<>();
+        List<ListOfOrder> resultList = new ArrayList<>();
+
+        /*for(Order order : setOrders){
+            for(ListOfOrder list : order.getListOfOrder()){
+                setList.add(list);
+            }
+        }*/
+
+        for(Order order : orderList){
+            resultList.addAll(listOfOrderService.getListByOrderId(order.getId()));
+        }
+
+        model.addAttribute("orders", resultList);
         return "order-info";
     }
 }

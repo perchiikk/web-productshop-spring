@@ -15,4 +15,6 @@ public interface ListOfOrderDao {
     void update(ListOfOrder listOfOrder);
 
     List<ListOfOrder> getAll();
+
+    List<ListOfOrder> getListByOrderId(Integer id);
 }

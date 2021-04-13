@@ -47,4 +47,9 @@ public class ListOfOrderServiceImpl implements ListOfOrderService{
     public List<ListOfOrder> getAll() {
         return listOfOrderDao.getAll();
     }
+
+    @Override
+    public List<ListOfOrder> getListByOrderId(Integer id) {
+        return listOfOrderDao.getListByOrderId(id);
+    }
 }

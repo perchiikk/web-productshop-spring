@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Transactional
     @Override
-    public Order getByCustomerId(Integer id) {
+    public List<Order>  getByCustomerId(Integer id) {
         return orderDao.getByCustomerId(id);
     }
 }

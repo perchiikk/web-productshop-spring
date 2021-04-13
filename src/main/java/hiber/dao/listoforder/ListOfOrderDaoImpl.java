@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -44,5 +45,20 @@ public class ListOfOrderDaoImpl implements ListOfOrderDao{
     public List<ListOfOrder> getAll() {
         TypedQuery<ListOfOrder> query = sessionFactory.getCurrentSession().createQuery("from ListOfOrder");
         return query.getResultList();
+    }
+
+    @Override
+    public List<ListOfOrder> getListByOrderId(Integer id) {
+        /*TypedQuery<ListOfOrder> query = sessionFactory.getCurrentSession().createQuery("from ListOfOrder where order.id = :id");
+        query.setParameter("id", id);
+        ////////////////////////*/
+        List<ListOfOrder> listAll = getAll();
+        List<ListOfOrder> result = new ArrayList<>();
+        for (ListOfOrder list : listAll){
+            if(list.getOrder().getId()==id){
+                result.add(list);
+            }
+        }
+        return result;
     }
 }

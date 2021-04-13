@@ -6,11 +6,15 @@
 </head>
 <body>
 
-<tr th:each="order : ${orders}">
+<!--<tr th:each="order : ${orders}">
     <td th:text="${order.getId()}"></td>
     <td th:text="${order.getPrice()}"></td>
     <td th:text="${order.getData()}"></td>
-</tr>
+</tr>-->
+
+<div th:each="order : ${orders}">
+    <a  th:text="'Id: ' + ${order.getId()} + ' Product: ' + ${order.getProduct().getName()} + ' Count: ' + ${order.getCount()}">product</a>
+</div>
 
 <a href="/shop/table">Go back</a>
 </body>

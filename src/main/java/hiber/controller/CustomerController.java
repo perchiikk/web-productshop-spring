@@ -5,6 +5,7 @@ import hiber.model.sql.ListOfOrder;
 import hiber.model.sql.Order;
 import hiber.model.sql.Product;
 import hiber.service.customer.CustomerService;
+import hiber.service.listoforder.ListOfOrderService;
 import hiber.service.order.OrderService;
 import hiber.service.shopmanager.ShopManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,15 @@ public class CustomerController {
     private CustomerService customerService;
     private ShopManagerService shopManagerService;
     private OrderService orderService;
+    private ListOfOrderService listOfOrderService;
 
     @Autowired
-    public CustomerController(CustomerService customerService, ShopManagerService shopManagerService, OrderService orderService) {
+    public CustomerController(CustomerService customerService, ShopManagerService shopManagerService,
+                              OrderService orderService, ListOfOrderService listOfOrderService) {
         this.customerService = customerService;
         this.shopManagerService = shopManagerService;
         this.orderService = orderService;
+        this.listOfOrderService = listOfOrderService;
     }
 
     @GetMapping()
@@ -68,8 +72,7 @@ public class CustomerController {
         if(reduce<0){
             return "error-payment";
         }
-        customer.setBudget(reduce);
-        customerService.update(customer);
+
         Order order = new Order(shopManagerService.getPayment(), new Date());
         order.setCustomer(customer);
         Set<ListOfOrder> setOrder = new HashSet<>();
@@ -78,10 +81,15 @@ public class CustomerController {
             listOfOrder.setOrder(order);
             listOfOrder.setProduct(entry.getKey());
             listOfOrder.setCount(entry.getValue());
+            setOrder.add(listOfOrder);
         }
         order.setListOfOrder(setOrder);
         orderService.add(order);
         model.addAttribute("payment", shopManagerService.getPayment());
+
+        customer.setBudget(reduce);
+        customerService.update(customer);
+
         shopManagerService.cleanOrderCart();
         return "payment";
     }
