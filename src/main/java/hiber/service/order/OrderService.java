@@ -16,4 +16,5 @@ public interface OrderService {
     List<Order> getAll();
 
     List<Order>  getByCustomerId(Integer id);
+
 }

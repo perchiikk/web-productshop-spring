@@ -12,11 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("shop")
@@ -88,17 +85,8 @@ public class HelloController {
 
     @GetMapping("/order/{id}")
     public String orderInfo(@PathVariable("id") int id, Model model){
-
-        //Set<Order> setOrders = customerService.getById(id).getOrder();
         List<Order> orderList = orderService.getByCustomerId(id);
-        //Set<ListOfOrder> setList = new HashSet<>();
         List<ListOfOrder> resultList = new ArrayList<>();
-
-        /*for(Order order : setOrders){
-            for(ListOfOrder list : order.getListOfOrder()){
-                setList.add(list);
-            }
-        }*/
 
         for(Order order : orderList){
             resultList.addAll(listOfOrderService.getListByOrderId(order.getId()));

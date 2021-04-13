@@ -16,4 +16,5 @@ public interface OrderDao {
     List<Order> getAll();
 
     List<Order>  getByCustomerId(Integer id);
+
 }
